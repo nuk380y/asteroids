@@ -1,5 +1,9 @@
+import random
+
 import pygame
 
+from asteroid import *
+from asteroidfield import *
 from constants import *
 from player import *
 
@@ -14,12 +18,16 @@ def main():
     dt = 0
 
     # Create groups for easier handling within gameloop
-    updatable = pygame.sprite.Group()
+    asteroid = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
+    updatable = pygame.sprite.Group()
 
+    Asteroid.containers = (asteroid, updatable, drawable)
+    AsteroidField.containers = updatable
     Player.containers = (updatable, drawable)
 
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+    field = AsteroidField()
 
     while True:
         for event in pygame.event.get():
