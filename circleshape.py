@@ -21,3 +21,13 @@ class CircleShape(pygame.sprite.Sprite):
     def update(self, dt):
         # sub-classes must override
         pass
+
+    def collision(self, other):
+        # Presume that no collision is the norm.
+        detected = False
+        # The distance that objects can be to start colliding
+        too_close = self.radius + other.radius
+
+        if pygame.math.Vector2.distance_to(self.position, other.position) <= too_close:
+            detected = True
+        return detected
